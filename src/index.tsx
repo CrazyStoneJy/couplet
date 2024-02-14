@@ -2,35 +2,22 @@ import pinyin, { Pinyin } from "pinyin";
 import { ENUM_PINYIN_STYLE } from "pinyin/lib/constant";
 import { useEffect, useState } from "react";
 import { Button, Text, TextInput, View } from "react-native";
+import { check } from "./check";
 
 function HomePage() {
 
-    const [text1, setText1] = useState('');
-    const [text2, setText2] = useState('');
+    // 一年四季行好运；下联：八方财宝进家门
+    const [text1, setText1] = useState('一年四季行好运');
+    const [text2, setText2] = useState('八方财宝进家门');
 
-    useEffect(() => {
-        const r: string[][] = pinyin('出光灿烂', {
-            style: ENUM_PINYIN_STYLE.TONE2
-        });
-        // setText(r);
-        console.log(r);
-        
-    }, []);
-
-    const check = () => {
+    const check_couplet = () => {
         if (!text1 || !text2) {
             return;
         }
         if (text1.length !== text2.length) {
             return;
         }
-        const res1: string[][] = pinyin(text1, {
-            style: ENUM_PINYIN_STYLE.TONE2
-        });
-        const res2: string[][] = pinyin(text2, {
-            style: ENUM_PINYIN_STYLE.TONE2
-        });
-        console.log(res1, res2);
+        check([text1, text2]);
     }
 
     return (
@@ -48,7 +35,7 @@ function HomePage() {
                 }}/>
             </View>
             <View style={{ marginHorizontal: 80, marginTop: 10 }}>
-                <Button title="ok" onPress={check}/>
+                <Button title="ok" onPress={check_couplet}/>
             </View>
         </View>
     );
